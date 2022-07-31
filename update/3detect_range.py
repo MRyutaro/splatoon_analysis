@@ -34,7 +34,7 @@ while True:
     contours, _ = cv2.findContours(
         binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    contours = list(filter(lambda x: cv2.contourArea(x) > 1600, contours))
+    contours = list(filter(lambda x: cv2.contourArea(x) > 500, contours))
 
     cv2.drawContours(frame, contours, -1, (0, 0, 255), 1, cv2.LINE_AA)
 

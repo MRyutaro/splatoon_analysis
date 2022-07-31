@@ -8,14 +8,14 @@ from time import sleep
 
 # メイン関数
 def main():
-    image = cv2.imread('./data/special.png')  # ファイル読み込み
+    image = cv2.imread('./data/death2_special1.png')  # ファイル読み込み
     height = image.shape[0]
     width = image.shape[1]
     image = cv2.resize(image, (round(width/4), round(height/4)))
 
     # BGRでの色抽出
     bgrLower = np.array([0, 0, 0])    # 抽出する色の下限
-    bgrUpper = np.array([70, 235, 255])    # 抽出する色の上限
+    bgrUpper = np.array([255, 100, 240])    # 抽出する色の上限
     bgrResult = bgrExtraction(image, bgrLower, bgrUpper)
     cv2.imshow('BGR_test1', bgrResult)
     sleep(1)
