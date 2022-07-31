@@ -8,7 +8,7 @@ from time import sleep
 
 # メイン関数
 def main():
-    image = cv2.imread('./data/sample.png')  # ファイル読み込み
+    image = cv2.imread('./data/special.png')  # ファイル読み込み
     height = image.shape[0]
     width = image.shape[1]
     image = cv2.resize(image, (round(width/4), round(height/4)))
@@ -26,6 +26,12 @@ def main():
     # hsvResult = hsvExtraction(image, hsvLower, hsvUpper)
     # cv2.imshow('HSV_test1', hsvResult)
     # sleep(1)
+
+    while True:
+        # キー入力を1ms待って、keyが「q」だったらbreak
+        key = cv2.waitKey(1) & 0xff
+        if key == ord('q'):
+            break
 
     cv2.destroyAllWindows()
 
