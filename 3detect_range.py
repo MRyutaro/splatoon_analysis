@@ -17,42 +17,27 @@ movie = cv2.VideoCapture('data/a.mp4')
 # 背景差分の設定
 fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
 
-# ファイルからフレームを1枚ずつ取得して動画処理後に保存する
 while True:
     ret, frame = movie.read()
-    # フレーム取得 # フレームが取得できない場合はループを抜ける
     if not ret:
         break
 
-    # フレームのサイズ変更
-    # height = frame.shape[0]
-    # width = frame.shape[1]
-    # frame = cv2.resize(frame, (round(2.5*width), round(2.5*height)))
-
-    detframe = frame[ymin:ymax, xmin:xmax]  # 背景差分する範囲を指定
+    detframe = frame[ymin:ymax, xmin:xmax]
 
     # BGR -> grayscale
-    gray = cv2.cvtColor(detframe, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(cv2.bitwise_not(detframe), cv2.COLOR_BGR2GRAY)
 
     # 閾値処理
-    _, binary = cv2.threshold(gray, 95, 255, cv2.THRESH_BINARY)
+    _, binary = cv2.threshold(gray, 190, 255, cv2.THRESH_BINARY)
 
     #  輪郭抽出
     contours, _ = cv2.findContours(
         binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    # 面積でフィルタリング
-    # contours = list(
-    #     filter(lambda cnt: cv2.contourArea(cnt) > 1000, contours))
-
-    # 輪郭を囲む長方形に変換
-    # rects = [cv2.boundingRect(cnt) for cnt in contours]
+    contours = list(filter(lambda x: cv2.contourArea(x) > 1800, contours))
 
     cv2.drawContours(frame, contours, -1, (0, 0, 255), 1, cv2.LINE_AA)
-    # 長方形を描画する。
-    bgr = frame.copy()
-    # for x, y, width, height in rects:
-    #     cv2.rectangle(bgr, (x, y), (x + width, y + height), (255, 0, 0), 2)
+
     # 指定範囲に赤枠
     cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 0, 255), 1)
 

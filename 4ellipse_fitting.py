@@ -32,7 +32,7 @@ while True:
     detframe = frame[ymin:ymax, xmin:xmax]  # 背景差分する範囲を指定
 
     # BGR -> grayscale
-    gray = cv2.cvtColor(detframe, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(cv2.bitwise_not(detframe), cv2.COLOR_BGR2GRAY)
 
     # 閾値処理
     _, binary = cv2.threshold(gray, 95, 255, cv2.THRESH_BINARY)
