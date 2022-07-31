@@ -1,1 +1,1 @@
-![sample picture][docs/image/sample.png]
+![sample picture](docs/image/sample.png)
