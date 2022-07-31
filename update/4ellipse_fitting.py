@@ -11,7 +11,7 @@ ymin, ymax = round(raw_ymin/2.5), round(raw_ymax/2.5)
 # ymin, ymax = 220, 330
 
 # 動画読み込みの設定
-movie = cv2.VideoCapture('../data/a.mp4')
+movie = cv2.VideoCapture('./data/a.mp4')
 # movie = cv2.VideoCapture(0)
 
 # 背景差分の設定
@@ -61,7 +61,7 @@ while True:
     # 長方形を描画する。
     bgr = frame.copy()
     # for x, y, width, height in rects:
-    
+
     #     cv2.rectangle(bgr, (x, y), (x + width, y + height), (255, 0, 0), 2)
     # 指定範囲に赤枠
     cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 0, 255), 1)

@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # 入力ファイルのパスを指定
-file = "../data/a.png"
+file = "./data/a.png"
 
 # 認識範囲
 xmin, xmax = 540, 890

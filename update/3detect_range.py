@@ -11,7 +11,7 @@ ymin, ymax = round(raw_ymin/2.5), round(raw_ymax/2.5)
 # ymin, ymax = 220, 330
 
 # 動画読み込みの設定
-movie = cv2.VideoCapture('../data/a.mp4')
+movie = cv2.VideoCapture('./data/a.mp4')
 # movie = cv2.VideoCapture(0)
 
 # 背景差分の設定
@@ -34,7 +34,7 @@ while True:
     contours, _ = cv2.findContours(
         binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    contours = list(filter(lambda x: cv2.contourArea(x) > 1800, contours))
+    contours = list(filter(lambda x: cv2.contourArea(x) > 1600, contours))
 
     cv2.drawContours(frame, contours, -1, (0, 0, 255), 1, cv2.LINE_AA)
 

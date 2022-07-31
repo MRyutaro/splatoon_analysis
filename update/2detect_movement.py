@@ -9,7 +9,7 @@ xmin, xmax = round(raw_xmin/2.5), round(raw_xmax/2.5)
 ymin, ymax = round(raw_ymin/2.5), round(raw_ymax/2.5)
 
 # 動画読み込みの設定
-movie = cv2.VideoCapture('../data/a.mp4')
+movie = cv2.VideoCapture('./data/a.mp4')
 # movie = cv2.VideoCapture(0)
 
 # 背景差分の設定
