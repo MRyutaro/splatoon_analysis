@@ -9,9 +9,6 @@ y_min, y_max = 16, 52
 
 
 if __name__ == "__main__":
-    # 背景差分の設定
-    fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
-
     while True:
         ret, frame = movie.read()
         if not ret:

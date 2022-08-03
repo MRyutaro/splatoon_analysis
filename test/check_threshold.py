@@ -2,7 +2,7 @@ import cv2
 import time
 
 movie = cv2.VideoCapture('data/a.mp4')
-# movie = cv2.VideoCapture(0)
+# movie = cv2.VideoCapture(1)
 
 while True:
     ret, frame = movie.read()

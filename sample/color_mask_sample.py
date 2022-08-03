@@ -1,6 +1,3 @@
-#
-# 色抽出のサンプルコード
-#
 import numpy as np
 import cv2
 from time import sleep
