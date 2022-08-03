@@ -9,7 +9,7 @@ image = cv2.imread(file)
 image = cv2.resize(image, (768, 432))
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-x_min, x_max = 216, 356
+x_min, x_max = 200, 356
 y_min, y_max = 16, 52
 
 
