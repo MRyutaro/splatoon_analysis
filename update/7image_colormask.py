@@ -16,9 +16,6 @@ y_min, y_max = 16, 52
 hsv_lower = np.array([0, 0, 0])
 hsv_upper = np.array([255, 100, 240])
 
-black = [0, 0, 0]
-white = [255, 255, 255]
-
 
 # HSVで特定の色を抽出する関数
 def hsvExtraction(image, hsvLower, hsvUpper):
@@ -29,17 +26,17 @@ def hsvExtraction(image, hsvLower, hsvUpper):
 
 
 if __name__ == "__main__":
-    plt.imshow(image)
-    plt.show()
+    # plt.imshow(cv2.cvtColor(image, cv2.COLOR_HSV2BGR))
+    # plt.show()
     image_color_mask = hsvExtraction(image, hsv_lower, hsv_upper)
-    plt.imshow(image_color_mask)
+    plt.imshow(cv2.cvtColor(image_color_mask, cv2.COLOR_HSV2BGR))
     plt.show()
     # グレースケール化
     gray_image = cv2.cvtColor(image_color_mask, cv2.COLOR_HSV2BGR)
     gray_image = cv2.cvtColor(image_color_mask, cv2.COLOR_BGR2GRAY)
-    plt.imshow(gray_image)
+    plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_GRAY2BGR))
     plt.show()
     # 閾値処理
-    ret, thresh = cv2.threshold(gray_image, 95, 255, cv2.THRESH_BINARY)
-    plt.imshow(thresh)
+    ret, thresh = cv2.threshold(gray_image, 40, 255, cv2.THRESH_BINARY)
+    plt.imshow(cv2.cvtColor(thresh, cv2.COLOR_GRAY2BGR))
     plt.show()
