@@ -13,8 +13,8 @@ image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
 x_min, x_max = 200, 356
 y_min, y_max = 16, 52
 
-hsv_lower = np.array([0, 0, 0])
-hsv_upper = np.array([255, 100, 240])
+hsv_lower = np.array([65, 0, 0])
+hsv_upper = np.array([85, 255, 255])
 
 
 # HSVで特定の色を抽出する関数
@@ -32,8 +32,10 @@ if __name__ == "__main__":
     plt.imshow(cv2.cvtColor(image_color_mask, cv2.COLOR_HSV2BGR))
     plt.show()
     # グレースケール化
-    gray_image = cv2.cvtColor(image_color_mask, cv2.COLOR_HSV2BGR)
-    gray_image = cv2.cvtColor(image_color_mask, cv2.COLOR_BGR2GRAY)
+    gray_image = np.copy(image)
+    gray_image[:, :, 0] = np.where(
+        image[:, :, 0] > hsv_upper[0],
+        image[:, :, 0] - 90, image[:, :, 0])  # type: ignore
     plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_GRAY2BGR))
     plt.show()
     # 閾値処理
