@@ -22,7 +22,7 @@ def main():
         frame = cv2.resize(frame, (768, 432))
 
         # BGRでの色抽出
-        bgrResult = bgrExtraction(frame, bgrLower, bgrUpper)
+        bgrResult = bgr_extraction(frame, bgrLower, bgrUpper)
         cv2.imshow('BGR_test1', bgrResult)
         cv2.waitKey(1)
         time.sleep(0.024)
@@ -31,17 +31,9 @@ def main():
 
 
 # BGRで特定の色を抽出する関数
-def bgrExtraction(image, bgrLower, bgrUpper):
+def bgr_extraction(image, bgrLower, bgrUpper):
     img_mask = cv2.inRange(image, bgrLower, bgrUpper)  # BGRからマスクを作成
     result = cv2.bitwise_and(image, image, mask=img_mask)  # 元画像とマスクを合成
-    return result
-
-
-# HSVで特定の色を抽出する関数
-def hsvExtraction(image, hsvLower, hsvUpper):
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # 画像をHSVに変換
-    hsv_mask = cv2.inRange(hsv, hsvLower, hsvUpper)    # HSVからマスクを作成
-    result = cv2.bitwise_and(image, image, mask=hsv_mask)  # 元画像とマスクを合成
     return result
 
 

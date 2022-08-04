@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # 入力ファイルのパスを指定
-file = "./data/sample.png"
+file = "./data/a.png"
 
 # 読み込み
 image = cv2.imread(file)
@@ -31,8 +31,8 @@ if __name__ == "__main__":
             contours1[i][j][0][1] += y_min
 
     # 結果の描画
-    cv2.drawContours(image, contours1, -1, (0, 255, 0), 2, cv2.LINE_AA)
-    cv2.rectangle(image, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
+    cv2.drawContours(image, contours1, -1, (0, 255, 0), 1, cv2.LINE_AA)
+    cv2.rectangle(image, (x_min, y_min), (x_max, y_max), (255, 0, 0), 1)
 
     plt.imshow(image)
     plt.show()

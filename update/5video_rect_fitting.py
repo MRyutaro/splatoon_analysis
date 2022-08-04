@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 print(f"contour: {_}, topleft: ({x}, {y})", end=" ")
                 print(f"width: {width}, height: {height}")
                 cv2.rectangle(
-                    frame, (x, y), (x + width, y + height), (255, 0, 0), 2)
+                    frame, (x, y), (x + width, y + height), (255, 0, 0), 1)
 
         cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 0, 255), 1)
 
