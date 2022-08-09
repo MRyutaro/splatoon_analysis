@@ -1,7 +1,7 @@
 import cv2
 import time
 
-movie = cv2.VideoCapture('./data/a.mp4')
+movie = cv2.VideoCapture('./data/video/asari.mp4')
 # movie = cv2.VideoCapture(1)
 
 x_min, x_max = 200, 356

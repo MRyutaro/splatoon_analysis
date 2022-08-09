@@ -1,7 +1,7 @@
 import cv2
 import time
 
-movie = cv2.VideoCapture('./data/a.mp4')
+movie = cv2.VideoCapture('./data/video/asari_trim.mp4')
 # movie = cv2.VideoCapture(1)
 
 x_min, x_max = 200, 356
@@ -35,9 +35,10 @@ if __name__ == "__main__":
                 contours[i][j][0][1] += y_min
 
         cv2.drawContours(frame, contours, -1, (0, 0, 255), 1, cv2.LINE_AA)
-        cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 0, 255), 1)
 
-        cv2.imshow('frame', cv2.resize(frame, (int(768), int(432))))
+        # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 0, 255), 1)
+
+        cv2.imshow('frame', cv2.resize(frame, (int(1920), int(1080))))
         cv2.waitKey(1)
         time.sleep(0.024)
 

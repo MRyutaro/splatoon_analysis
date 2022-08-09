@@ -1,0 +1,10 @@
+[setting]
+
+# live or recorded
+MODE = "recorded"
+
+IMAGE_DIR = './data/image/a.png'
+
+VIDEO_PATH = './data/video/asari_trim.mp4'
+PORT_NUM = 1
+
