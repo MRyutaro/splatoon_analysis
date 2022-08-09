@@ -1,5 +1,6 @@
 import cv2
 import json
+import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
 import toml
@@ -13,10 +14,12 @@ def main():
 
     movie = cv2.VideoCapture(capture_mode_setting())
     frame_width, frame_height = position["frame_size"]["width"], position["frame_size"]["height"]
+    my_icon_range = [[position["icon"]["my"]["min"]["x"],
+                      position["icon"]["my"]["min"]["y"]],
+                     [position["icon"]["my"]["max"]["x"],
+                     position["icon"]["my"]["max"]["y"]]]
 
-    # color settings--------------
     ink_color = color["purple"]["hue"]
-    # ink_color = 85
     color_range = color["purple"]["range"]
 
     while True:
@@ -27,20 +30,19 @@ def main():
         frame = cv2.resize(frame, (frame_width, frame_height))
 
         binary_image = change_color2white(frame, ink_color, color_range)
-        contours = extract_contours(binary_image, (200, 16), (356, 52), 10)
-        # binary_image = cv2.cvtColor(binary_image, cv2.COLOR_GRAY2RGB)
-        contours = list(map(lambda x: cv2.approxPolyDP(x, 10, True), contours))
-        for i, cnt in enumerate(contours):
-            x, y, width, height = cv2.boundingRect(cnt)
-            # arclen = cv2.arcLength(cnt, True)
-            # approx = cv2.approxPolyDP(cnt, arclen*0.02, True)
 
-            cv2.rectangle(
-                frame, (x, y), (x + width, y + height), (255, 0, 0), 1)
-            cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_PLAIN,
-                        1, (0, 255, 0), 1, cv2.LINE_AA)
+        contours = extract_contours(binary_image, my_icon_range, 10)
+        # contours = list(
+        #     map(lambda x: cv2.approxPolyDP(x, 12, False), contours))
+        # for i, cnt in enumerate(contours):
+        #     x, y, width, height = cv2.boundingRect(cnt)
 
-        # cv2.drawContours(frame, contours, -1, (0, 0, 255), 0, cv2.LINE_AA)
+        #     cv2.rectangle(
+        #         frame, (x, y), (x + width, y + height), (255, 0, 0), 1)
+        #     cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_PLAIN,
+        #                 1, (0, 255, 0), 1, cv2.LINE_AA)
+
+        cv2.drawContours(frame, contours, -1, (0, 0, 255), 0, cv2.LINE_AA)
 
         cv2.imshow('frame', cv2.resize(frame, (1920, 1080)))
         cv2.waitKey(1)
@@ -92,11 +94,18 @@ def change_color2white(raw_image, color, color_range):
     return binary
 
 
-def extract_contours(binary_image, min_pos, max_pos, contours_area_lower):
-    clipped_frame = binary_image[min_pos[1]:max_pos[1], min_pos[0]:max_pos[0]]
+def extract_contours(binary_image, clipped_range, contours_area_lower):
+    clipped_frame = binary_image[clipped_range[0][1]:clipped_range[1][1],
+                                 clipped_range[0][0]:clipped_range[1][0]]
+    dst = cv2.adaptiveThreshold(
+        clipped_frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 50)
+
+    plt.imshow(clipped_frame, cmap="gray")
+    plt.show()
+
     # 輪郭抽出
     contours, _ = cv2.findContours(
-        clipped_frame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        dst, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     # フィルタ
     contours = list(filter(lambda x: cv2.contourArea(x)
                     > contours_area_lower, contours))
@@ -104,8 +113,8 @@ def extract_contours(binary_image, min_pos, max_pos, contours_area_lower):
     # 輪郭位置の補正
     for i in range(len(contours)):
         for j in range(len(contours[i])):
-            contours[i][j][0][0] += min_pos[0]
-            contours[i][j][0][1] += min_pos[1]
+            contours[i][j][0][0] += clipped_range[0][0]
+            contours[i][j][0][1] += clipped_range[0][1]
     return contours
 
 
