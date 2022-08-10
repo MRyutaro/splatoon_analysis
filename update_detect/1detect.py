@@ -7,10 +7,12 @@ import toml
 
 
 def main():
-    open_position = open('config/position.json', 'r')
+    open_position = open('config/json/position.json', 'r')
     position = json.load(open_position)
-    open_color = open('config/color.json', 'r')
+    open_color = open('config/json/color.json', 'r')
     color = json.load(open_color)
+    start_file = "config/image/cut5.png"
+    start = cv2.imread(start_file)
 
     movie = cv2.VideoCapture(capture_mode_setting())
     frame_width, frame_height = position["frame_size"]["width"], position["frame_size"]["height"]
@@ -27,11 +29,11 @@ def main():
     my_icons_range = setup_icons_range(my_team_range)
     # opponent_icons_range = setup_icons_range(opponent_team_range)
 
-    ink_color = color["purple"]["hue"]
-    color_range = color["purple"]["range"]
-
     my_team_condition = ["alive", "alive", "alive", "alive"]
     # opponent_team_condition = ["alive", "alive", "alive", "alive"]
+
+    ink_color = color["purple"]["hue"]
+    color_range = color["purple"]["range"]
 
     is_gaming = False
     while True:
@@ -40,6 +42,8 @@ def main():
             break
 
         frame = cv2.resize(frame, (frame_width, frame_height))
+        is_gaming = check_is_gaming(start, frame)
+        print(is_gaming)
         binary_image = change_color2white(frame, ink_color, color_range)
 
         if is_gaming is True:
@@ -48,20 +52,21 @@ def main():
                                              my_icons_range[person][0][0]:my_icons_range[person][1][0]]
                 unique, counts = np.unique(clipped_frame, return_counts=True)
                 print(unique, counts)
-                # result = np.column_stack((unique, counts))
-                # print(f"{person+1}人目:{result[1]}", end=" ")
-                # if result[1][1] >= 200:
-                #     my_team_condition[person] = "alive"
-                # elif result[1][1] < 200:
-                #     my_team_condition[person] = "SP"
+                result = np.column_stack((unique, counts))
+                print(f"{person+1}人目:{result[1]}", end=" ")
+                if result[1][1] >= 200:
+                    my_team_condition[person] = "alive"
+                elif result[1][1] < 200:
+                    my_team_condition[person] = "SP"
             print(my_team_condition)
 
+        cv2.rectangle(frame, (365, 29), (375, 45), (255, 0, 0), 1)
         draw_icons(frame, my_icons_range)
         # draw_icons(frame, opponent_icons_range)
 
         cv2.imshow('frame', cv2.resize(frame, (960, 540)))
         cv2.waitKey(1)
-        sleep(0.1)
+        sleep(0.02)
 
     movie.release()
 
@@ -92,6 +97,11 @@ def setup_icons_range(team_range):
         person_range = [min, max]
         persons_range.append(person_range)
     return persons_range
+
+
+def check_is_gaming(start_image, frame):
+    minute_range = frame[29:45, 365:375]
+    return np.array_equal(start_image, minute_range)
 
 
 def draw_icons(frame, icons_range):
