@@ -6,7 +6,7 @@ def onMouse(event, x, y, flags, params):
         print(x, y)
 
 
-img = cv2.imread('data/image/a.png')
+img = cv2.imread('data/image/map1.png')
 img = cv2.resize(img, (768, 432))
 print(img.shape)
 cv2.imshow('sample', img)
