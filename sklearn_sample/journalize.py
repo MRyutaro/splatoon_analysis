@@ -35,4 +35,4 @@ if __name__ == "__main__":
     while True:
         images = glob.glob('data/num_dataset/train/ones/*.jpg')
         show_images(images[0:8])
-        journal_image(cv2.waitKey(0), images[0])
+        journal_image(, images[0])

@@ -44,29 +44,30 @@ def main():
         frame = cv2.resize(frame, (frame_width, frame_height))
 
         # is_gaming = check_is_gaming(frame)
-        # is_maping = check_is_maping(frame)
         # print(is_gaming)
+        # is_maping = check_is_maping(frame)
+        # print(is_maping)
 
         if is_gaming is True:
-            binary_image = change_color2white(frame, ink_color, color_range)
-            for person in range(len(my_icons_range)):
-                clipped_frame = binary_image[my_icons_range[person][0][1]:my_icons_range[person][1][1],
-                                             my_icons_range[person][0][0]:my_icons_range[person][1][0]]
-                unique, counts = np.unique(clipped_frame, return_counts=True)
-                result = np.column_stack((unique, counts))
-                # もしmapを開いていなかったら、、、
-                # if is_maping is True:
-                if len(result) > 1:
-                    print(f"{person+1}人目:{result[1]}", end=" ")
-                    if result[1][1] >= 200:
-                        my_team_condition[person] = "alive"
-                    elif result[1][1] < 200:
-                        my_team_condition[person] = "SP"
-            print(my_team_condition)
+            if is_maping is False:
+                binary_image = change_color2white(frame, ink_color, color_range)
+                for person in range(len(my_icons_range)):
+                    clipped_frame = binary_image[my_icons_range[person][0][1]:my_icons_range[person][1][1],
+                                                 my_icons_range[person][0][0]:my_icons_range[person][1][0]]
+                    unique, counts = np.unique(clipped_frame, return_counts=True)
+                    result = np.column_stack((unique, counts))
+                    if len(result) > 1:
+                        # print(f"{person+1}人目:{result[1]}", end=" ")
+                        if result[1][1] >= 200:
+                            my_team_condition[person] = "alive"
+                        elif result[1][1] < 200:
+                            my_team_condition[person] = "SP"
+                # print(my_team_condition)
 
         cv2.rectangle(frame, (366, 30), (375, 45), (255, 0, 0), 1)
         cv2.rectangle(frame, (382, 30), (391, 45), (255, 0, 0), 1)
         cv2.rectangle(frame, (391, 30), (400, 45), (255, 0, 0), 1)
+
         draw_icons(frame, my_icons_range)
         # draw_icons(frame, opponent_icons_range)
 
@@ -106,9 +107,22 @@ def setup_icons_range(team_range):
     return persons_range
 
 
-# def check_is_gaming(frame):
-#     minute_range = frame[30:45, 366:375]
-#     # minute_rangeについて画像認識をして、5だったらスタート
+def check_is_gaming(frame):
+    minute_range = frame[30:45, 366:375]
+    # minute_rangeについて画像認識をして、5だったらスタート
+
+    return True
+
+
+
+def check_is_maping(frame):
+    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    _, binary = cv2.threshold(gray_frame, 50, 255, cv2.THRESH_BINARY)
+
+    # (40, 25), (73, 60)の範囲で画像認識
+
+    return True
 
 
 def draw_icons(frame, icons_range):
