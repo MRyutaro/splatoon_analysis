@@ -43,8 +43,9 @@ while True:
 
         areaframe = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-    cv2.imshow('frame', cv2.resize(frameDelta, (1920, 1080)))
-    cv2.waitKey(1)
+    cv2.imshow('frame', cv2.resize(frameDelta, (960, 540)))
+    if cv2.waitKey(1) == 27:
+        exit()
     time.sleep(0.02)
 
 cv2.destroyAllWindows()

@@ -114,7 +114,6 @@ def check_is_gaming(frame):
     return True
 
 
-
 def check_is_maping(frame):
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

@@ -5,7 +5,7 @@ import toml
 
 
 def main():
-    obj = toml.load("settings.toml")
+    obj = toml.load("config/settings.toml")
     select_mode = obj["setting"]["MODE"]
     capture_content = 1
     if select_mode == "recorded":
