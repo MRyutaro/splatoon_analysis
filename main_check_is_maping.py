@@ -54,16 +54,16 @@ if __name__ == "__main__":
         else:
             print("map is closing")
 
-        # check_range = [["left", [45, 205], [50, 222]],
-        #                ["top", [309, 40], [329, 44]],
-        #                ["right", [587, 204], [591, 225]],
-        #                ["down", [309, 387], [329, 392]]]
-        # frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        # gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        # _, binary = cv2.threshold(gray_frame, 150, 255, cv2.THRESH_BINARY)
-        # for i in range(4):
-        #     cv2.rectangle(binary, (check_range[i][1]), (check_range[i][2]), (255, 0, 0), 1)
-        cv2.imshow('frame', frame)
+        check_range = [["left", [45, 205], [50, 222]],
+                       ["top", [309, 40], [329, 44]],
+                       ["right", [587, 204], [591, 225]],
+                       ["down", [309, 387], [329, 392]]]
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        _, binary = cv2.threshold(gray_frame, 150, 255, cv2.THRESH_BINARY)
+        for i in range(4):
+            cv2.rectangle(binary, (check_range[i][1]), (check_range[i][2]), (255, 0, 0), 1)
+        cv2.imshow('frame', cv2.resize(frame, (1920, 1080)))
         if cv2.waitKey(1) == 27:
             break
 
