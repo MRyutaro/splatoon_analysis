@@ -27,7 +27,8 @@ def draw_icons(frame, icons_range):
             (255, 0, 0), 1)
 
 
-def judge_pinch()
+def judge_pinch():
+    pass
 
 
 # 黒のポイントを作ってあげる。単に4分割する。
@@ -39,7 +40,6 @@ if __name__ == "__main__":
     # movie = cv2.VideoCapture(1)
     movie = cv2.VideoCapture('./data/video/area_mypinch.mp4')
 
-    frame_count = 0
     before = None
     while True:
         ret, frame = movie.read()
@@ -56,6 +56,5 @@ if __name__ == "__main__":
 
         cv2.imshow('frame', frame)
         time.sleep(0.03)
-        frame_count += 1
 
     movie.release()
