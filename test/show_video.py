@@ -2,7 +2,7 @@ import cv2
 import time
 
 # movie = cv2.VideoCapture(1)
-movie = cv2.VideoCapture('./data/video/asari.mp4')
+movie = cv2.VideoCapture('./data/video/area.mp4')
 
 while True:
     ret, frame = movie.read()
@@ -11,11 +11,10 @@ while True:
 
     frame = cv2.resize(frame, (768, 432))
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) == 27:
         break
 
     cv2.imshow('frame', frame)
-    cv2.waitKey(1)
-    time.sleep(0.02)
+    time.sleep(0.03)
 
 movie.release()

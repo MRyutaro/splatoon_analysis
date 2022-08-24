@@ -4,31 +4,26 @@ import time
 
 
 def check_is_maping(frame):
-    check_range = [["left", [45, 205], [50, 222]],
-                   ["top", [309, 40], [329, 44]],
-                   ["right", [587, 204], [591, 225]],
-                   ["down", [309, 387], [329, 392]]]
+    map_range = [["left", [45, 205], [50, 222], 255],
+                 ["top", [309, 40], [329, 44], 255],
+                 ["right", [587, 204], [591, 225], 255]]
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray_frame, 150, 255, cv2.THRESH_BINARY)
 
-    for i in range(4):
-        if check_is_maping_by_range(
-                binary, check_range[i][0], check_range[i][1], check_range[i][2]) is False:
+    for i in range(len(map_range)):
+        if check_whether_one_color(
+                binary, map_range[i][1], map_range[i][2], map_range[i][3]) is False:
             return False
     return True
 
 
-def check_is_maping_by_range(binary, icon_name, min, max):
+def check_whether_one_color(binary, min, max, color):
     clipped_range = binary[min[1]:max[1], min[0]:max[0]]
     unique, counts = np.unique(clipped_range, return_counts=True)
     result = np.column_stack((unique, counts))
-    # print(icon_name, "\t", result)
-    # cv2.imshow(icon_name, clipped_range)
-    # if cv2.waitKey(0) == 27:
-    #     exit()
     if len(result) == 1:
-        if result[0][0] == 255:
+        if result[0][0] == color:
             return True
         else:
             return False
@@ -54,16 +49,17 @@ if __name__ == "__main__":
         else:
             print("map is closing")
 
-        check_range = [["left", [45, 205], [50, 222]],
-                       ["top", [309, 40], [329, 44]],
-                       ["right", [587, 204], [591, 225]],
-                       ["down", [309, 387], [329, 392]]]
+        map_range = [["left", [45, 205], [50, 222]],
+                     ["top", [309, 40], [329, 44]],
+                     ["right", [587, 204], [591, 225]]]
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         _, binary = cv2.threshold(gray_frame, 150, 255, cv2.THRESH_BINARY)
-        for i in range(4):
-            cv2.rectangle(binary, (check_range[i][1]), (check_range[i][2]), (255, 0, 0), 1)
-        cv2.imshow('frame', cv2.resize(frame, (1920, 1080)))
+        for i in range(len(map_range)):
+            cv2.rectangle(
+                frame, (map_range[i][1]), (map_range[i][2]), (255, 0, 0), 1)
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        cv2.imshow('frame', frame)
         if cv2.waitKey(1) == 27:
             break
 

@@ -3,7 +3,7 @@ import time
 
 # cap = cv2.VideoCapture(1)
 
-filepath = './data/video/asari.mp4'
+filepath = './data/video/area.mp4'
 cap = cv2.VideoCapture(filepath)
 
 
@@ -26,22 +26,22 @@ while True:
     frameDelta = cv2.absdiff(gray, cv2.convertScaleAbs(before))
 
     # frameDeltaの画像を２値化
-    _, thresh = cv2.threshold(frameDelta, 3, 255, cv2.THRESH_BINARY)
+    # _, thresh = cv2.threshold(frameDelta, 3, 255, cv2.THRESH_BINARY)
 
-    # 輪郭のデータを取得
-    contours, _ = cv2.findContours(thresh,
-                                   cv2.RETR_EXTERNAL,
-                                   cv2.CHAIN_APPROX_SIMPLE)
+    # # 輪郭のデータを取得
+    # contours, _ = cv2.findContours(thresh,
+    #                                cv2.RETR_EXTERNAL,
+    #                                cv2.CHAIN_APPROX_SIMPLE)
 
-    # 差分があった点を画面に描画
-    for target in contours:
-        x, y, w, h = cv2.boundingRect(target)
+    # # 差分があった点を画面に描画
+    # for target in contours:
+    #     x, y, w, h = cv2.boundingRect(target)
 
-        # 小さい変更点は無視
-        # if w < 30:
-        #     continue
+    #     # 小さい変更点は無視
+    #     if w < 30:
+    #         continue
 
-        areaframe = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    #     areaframe = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     cv2.imshow('frame', cv2.resize(frameDelta, (960, 540)))
     if cv2.waitKey(1) == 27:
