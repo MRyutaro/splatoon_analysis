@@ -26,7 +26,7 @@
         }
       }
     },
-    "my_pinch": {
+    "friend_pinch": {
       "my": {
         "min": {
           "x": 235,
@@ -48,7 +48,7 @@
         }
       }
     },
-    "opponent_pinch": {
+    "enemy_pinch": {
       "my": {
         "min": {
           "x": 207,
