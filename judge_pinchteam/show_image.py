@@ -2,16 +2,15 @@ import cv2
 
 
 if __name__ == "__main__":
-    # image_path = "./data/image/pinch/my_pinch.png"
-    image_path = "./data/image/pinch/your_pinch.png"
+    image_path = "./data/image/pinch/my_pinch.png"
+    # image_path = "./data/image/pinch/your_pinch.png"
     # image_path = "./data/image/5.png"
     image = cv2.imread(image_path)
     image = cv2.resize(image, (768, 432))
 
-    my_range = image[17:53, 207:350]
-    my_band = my_range[22:30, 0:144]
-    your_range = image[17:53, 414:560]
-    your_band = your_range[22:30, 0:144]
+    my_range = image[39:47, 207:350]
+    your_range = image[39:47, 414:560]
+    cv2.rectangle(my_range, (10, 0), (16, 4), (255, 0, 0), 1)
     # cv2.imwrite("data/image/my_band_default.png", my_band)
 
     # my_pinch
@@ -26,6 +25,7 @@ if __name__ == "__main__":
     # cv2.rectangle(image, (418, 21), (533, 50), (255, 0, 0), 1)
 
     # image = cv2.resize(image, (1920, 1080))
-    cv2.imshow("image", my_band)
+    cv2.imshow("image1", your_range)
+    cv2.imshow("image2", my_range)
     if cv2.waitKey(0) == 27:
         exit()
