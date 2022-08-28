@@ -58,9 +58,9 @@ def setup_color_list(frame, checkpoints):
     return color_list
 
 
-# 3つの要素の内、一つだけ正しいのがある
+# 3つの要素の内、一つだけ正しいのがあるようにしたい。
 def judge_pinch_team(color_list):
-    state = ["default", "friend", "enemy"]
+    # state = ["default", "friend", "enemy"]
     for state_num in range(len(color_list)):
         float_means = np.mean(color_list[state_num], axis=1)
         int_means = np.floor(float_means)
@@ -71,7 +71,7 @@ def judge_pinch_team(color_list):
 
 if __name__ == "__main__":
     # movie = cv2.VideoCapture(1)
-    movie = cv2.VideoCapture('./data/video/asari_trim.mp4')
+    movie = cv2.VideoCapture('./data/video/asari.mp4')
     # movie = cv2.VideoCapture('./data/video/pinch/area_default_only.mp4')
     # movie = cv2.VideoCapture('./data/video/pinch/area_mypinch_only.mp4')
     # movie = cv2.VideoCapture('./data/video/pinch/area_yourpinch_only.mp4')

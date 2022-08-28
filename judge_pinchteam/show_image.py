@@ -10,12 +10,12 @@ if __name__ == "__main__":
 
     my_range = image[39:47, 207:350]
     your_range = image[39:47, 414:560]
-    cv2.rectangle(my_range, (10, 0), (16, 4), (255, 0, 0), 1)
+    # cv2.rectangle(my_range, (10, 0), (16, 4), (255, 0, 0), 1)
     # cv2.imwrite("data/image/my_band_default.png", my_band)
 
     # my_pinch
-    # cv2.rectangle(image, (180, 24), (230, 40), (255, 0, 0), 1)
-    # pinch = image[24:40, 180:230]
+    cv2.rectangle(image, (180, 24), (230, 40), (255, 0, 0), 1)
+    pinch = image[24:40, 180:230]
     # cv2.rectangle(image, (235, 20), (348, 50), (255, 0, 0), 1)
     # cv2.rectangle(image, (414, 17), (560, 53), (255, 0, 0), 1)
 
@@ -25,7 +25,6 @@ if __name__ == "__main__":
     # cv2.rectangle(image, (418, 21), (533, 50), (255, 0, 0), 1)
 
     # image = cv2.resize(image, (1920, 1080))
-    cv2.imshow("image1", your_range)
-    cv2.imshow("image2", my_range)
+    cv2.imshow("image", pinch)
     if cv2.waitKey(0) == 27:
         exit()
