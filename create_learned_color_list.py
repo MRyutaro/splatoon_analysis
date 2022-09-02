@@ -30,6 +30,7 @@ import numpy as np
 # ずっと白or黒が入ってる範囲を引数に
 # いちいち範囲を調べるのだるい、、
 
+
 # find_means_of(split_images) -> color_mean_list_in_range
 # split_images=[[image0, image1, ...], [image0, image1, ...], ...]
 # color_mean_list_in_range=[[10, 13, ...]. [9, 11, ...], ...]
