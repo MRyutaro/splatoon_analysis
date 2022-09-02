@@ -1,0 +1,10 @@
+"map": {
+    "is_opened": {
+        "range": "learned_range_list",
+        "color": "learned_color_list"
+    },
+    "is_not_opened": {
+        "range": "learned_range_list",
+        "color": "learned_color_list"
+    }
+}

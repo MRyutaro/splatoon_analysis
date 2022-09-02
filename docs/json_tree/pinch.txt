@@ -1,0 +1,10 @@
+"in_pinch": {
+    "is_friend": {
+        "range": "learned_range_list",
+        "color": "learned_color_list"
+    },
+    "is_enemy": {
+        "range": "learned_range_list",
+        "color": "learned_color_list"
+    }
+}

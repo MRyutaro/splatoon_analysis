@@ -1,0 +1,41 @@
+{
+  "game": {
+    "time": 300,
+    "start": {
+      "threshold": [
+        100,
+        255
+      ],
+      "minute_image_range": [
+        [
+          363,
+          27
+        ],
+        [
+          380,
+          49
+        ]
+      ],
+      "targets": [
+        {
+          "range": "range1",
+          "color": "color1"
+        },
+        {
+          "...": "...",
+          "...": "..."
+        }
+      ]
+    },
+    "finish": {
+      "threshold": {
+        "color": "color",
+        "color_range": "color_range"
+      },
+      "range": {
+        "range1": "range1",
+        "...": "..."
+      }
+    }
+  }
+}
