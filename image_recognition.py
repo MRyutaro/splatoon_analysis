@@ -3,15 +3,15 @@ import time
 import numpy as np
 
 # -------------------------------------
-# class train_movie
+# class TrainImage():
 # video
 # -> (学習させたい動画のパス、学習させたい範囲、学習させたいラベルの名前)
 # -> {"range": "range_list",
 #    "color": "color_list"}
 
 # binarize(bgr_image) -> binary
-# gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-# _, binary = cv2.threshold(gray_frame, 95, 255, cv2.THRESH_BINARY)
+# gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# _, binary = cv2.threshold(gray_image, 95, 255, cv2.THRESH_BINARY)
 
 # split(image_in_search_range, width_split_num, height_split_num) -> split_images
 # image_in_search_range=[[x_min, y_min], [x_max, y_max]]
@@ -46,32 +46,30 @@ import numpy as np
 # {"label": learned_color_list}
 # の形でjsonファイルに書き込む
 
-# ---------------------------------------
-
-# jsonの構造について
-# 条件分岐（マップ開くor開かない、ゲームしてるorしてない、、、）
-# {"属性1": {
-#     {"label1": learned_color_list,
-#      "label2": learned_color_list,
-#      "label3": learned_color_list,
-#      ...}},
-#  ...
-# }
-
 # ------------------------------------------
-# read_learned_color_list() -> learned_color_list
+# class TestImage(game_transition: str):
+# video -> flag
 
-# recognize(test_movie, 判定したい事柄, learned_color_list) -> flag
-# "判定したい事柄"の引数を与えることで探す範囲を狭める
+# read_learned_color() -> learned_color=list:
+# json
+
+# clip_image(learned_range: list) -> clipped_image=list:
+
+# matche_the_image(learned_color: list, clipped_image: list) -> flag=boolean:
 # 誤差込みで認識する
-# np.allclose(記録されたデータ, 今調べたいフレームのデータ, rtol=??, atol=??)を使う
+# np.allclose(learned_color_list, clipped_image, rtol=??, atol=??)を使う
 # aとbを比較する
 # この場合aとbはlistの要素の一つ？↓の関数で使われる変数が何なのか調べる
 # np.allcloseの戻り値は何なのか
 # if 誤差 = absolute(a-b) <= (atol + rtol*absolute(b)) なら一致すると判定
-# まずはfriendのpinchを判定し、一致したらreturn 1
-# 次にenemyを判定し、一致したらreturn 2
-# elseでreturn 0
+
+# recognize(image, label: str, learned_range: list, learned_color: list) -> label=str:
+
+# main():
+#   while movie.isOpened:
+#       ret, frame = movie.read()
+#       recognize()
+
 
 # ----------------------------------------------
 
