@@ -6,10 +6,18 @@ def onMouse(event, x, y, flags, params):
         print(x, y)
 
 
-# path = "data/image/band/my_band_in_your_pinch.png"
-path = "data/image/band/your_band_in_my_pinch.png"
-img = cv2.imread(path)
-# print(img.shape)
-cv2.imshow('sample', img)
-cv2.setMouseCallback('sample', onMouse)
-cv2.waitKey(0)
+if __name__ == "__main__":
+    # ピンチの判定
+    # image_path = "./data/image/friend_pinch.png"
+    # image_path = "./data/image/enemy_pinch.png"
+    # ゲーム開始
+    # image_path = "./data/image/start.png"
+    # ゲーム終了
+    # image_path = "./data/image/finish.png"
+    # マップ開いてる
+    image_path = "./data/image/map.png"
+
+    image = cv2.imread(image_path)
+    cv2.imshow('image', cv2.resize(image, (768, 432)))
+    cv2.setMouseCallback('image', onMouse)
+    cv2.waitKey(0)
