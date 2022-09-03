@@ -1,0 +1,14 @@
+{
+    "in_pinch": {
+        "is_friend": {
+            "threshold": "threshold_list",
+            "range": "range_list",
+            "color": "color_list"
+        },
+        "is_enemy": {
+            "threshold": "threshold_list",
+            "range": "range_list",
+            "color": "color_list"
+        }
+    }
+}

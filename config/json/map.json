@@ -1,0 +1,21 @@
+{
+    "map": {
+        "is_opened": {
+            "threshold": "threshold_list",
+            "range": [
+                {
+                    "target": "target",
+                    "color": "color"
+                },
+                {
+                    "..": "..",
+                    "...": "..."
+                },
+                {
+                    "..": "..",
+                    "...": "..."
+                }
+            ]
+        }
+    }
+}

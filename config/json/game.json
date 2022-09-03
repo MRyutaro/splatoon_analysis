@@ -1,0 +1,38 @@
+{
+  "game": {
+    "regular_battle_time": 180,
+    "ranked_battletime": 300,
+    "starts": {
+      "threshold": [
+        100,
+        255
+      ],
+      "range": [
+        {
+          "taget": "target1",
+          "color": "color1"
+        },
+        {
+          "..": "..",
+          "...": "..."
+        }
+      ]
+    },
+    "finishes": {
+      "threshold": {
+        "color": "color",
+        "color_range": "color_range"
+      },
+      "range": [
+        {
+          "target": "target1",
+          "color": "color1"
+        },
+        {
+          "..": "..",
+          "...": "..."
+        }
+      ]
+    }
+  }
+}
