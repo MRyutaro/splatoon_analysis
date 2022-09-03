@@ -3,16 +3,20 @@ import numpy as np
 import time
 
 
+def read_json():
+    return [["area1", [1, 2], [16, 3], 0],
+            ["area2", [1, 2], [3, 20], 0],
+            ["area3", [1, 19], [17, 22], 0],
+            ["area4", [11, 8], [12, 9], 0],
+            ["area5", [4, 12], [6, 13], 0],
+            ["area6", [6, 5], [11, 6], 255],
+            ["area7", [5, 6], [7, 9], 255],
+            ["area8", [10, 12], [11, 15], 255],
+            ["area9", [6, 15], [10, 16], 255]]
+
+
 def check_start_game(frame):
-    start_range = [["area1", [1, 2], [16, 3], 0],
-                   ["area2", [1, 2], [3, 20], 0],
-                   ["area3", [1, 19], [17, 22], 0],
-                   ["area4", [11, 8], [12, 9], 0],
-                   ["area5", [4, 12], [6, 13], 0],
-                   ["area6", [6, 5], [11, 6], 255],
-                   ["area7", [5, 6], [7, 9], 255],
-                   ["area8", [10, 12], [11, 15], 255],
-                   ["area9", [6, 15], [10, 16], 255]]
+    start_range = read_json()
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     _, binary = cv2.threshold(gray_frame, 100, 255, cv2.THRESH_BINARY)
@@ -42,14 +46,11 @@ if __name__ == "__main__":
     movie = cv2.VideoCapture('./data/video/asari.mp4')
 
     is_gaming = False
-    while True:
+    while movie.isOpened:
         ret, frame = movie.read()
-        if not ret:
-            break
-
         frame = cv2.resize(frame, (768, 432))
 
-        if is_gaming is False:
+        if not is_gaming:
             is_gaming = check_start_game(frame)
         print(is_gaming)
 

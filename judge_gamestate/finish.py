@@ -3,11 +3,18 @@ import numpy as np
 import time
 
 
+# これだと色が変わったときに対応できない。。。
+
+
+def read_json():
+    return [["upper_left", [35, 43], [87, 68], 255],
+            ["upper_right", [549, 28], [581, 41], 255],
+            ["botton_left", [29, 282], [154, 298], 255],
+            ["bottom_right", [508, 364], [610, 383], 255]]
+
+
 def check_finish_game(frame):
-    finish_range = [["upper_left", [35, 43], [87, 68], 255],
-                    ["upper_right", [549, 28], [581, 41], 255],
-                    ["botton_left", [29, 282], [154, 298], 255],
-                    ["bottom_right", [508, 364], [610, 383], 255]]
+    finish_range = read_json()
     binary = change_color2white(frame, 140, 30)
     for i in range(len(finish_range)):
         if check_whether_one_color(
