@@ -1,14 +1,40 @@
 {
     "in_pinch": {
-        "is_friend": {
+        "is friend": {
             "threshold": "threshold_list",
-            "range": "range_list",
-            "color": "color_list"
+            "range": [
+                {
+                    "target": [
+                        [
+                            184,
+                            16
+                        ],
+                        [
+                            214,
+                            33
+                        ]
+                    ],
+                    "color": "color1"
+                }
+            ]
         },
-        "is_enemy": {
+        "is enemy": {
             "threshold": "threshold_list",
-            "range": "range_list",
-            "color": "color_list"
+            "range": [
+                {
+                    "target": [
+                        [
+                            554,
+                            16
+                        ],
+                        [
+                            589,
+                            33
+                        ]
+                    ],
+                    "color": "color1"
+                }
+            ]
         }
     }
 }

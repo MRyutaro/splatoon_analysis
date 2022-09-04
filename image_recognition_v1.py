@@ -15,17 +15,20 @@ class ImageRecognition():
     def read_json(self, game_transition: str, label: str):
         open_json = open(f"config/json/{game_transition}.json")
         read_json = json.load(open_json)
+        # print(read_json[game_transition][label]["threshold"])
+        # print(read_json[game_transition][label]["range"])
         return read_json[game_transition][label]["threshold"], read_json[game_transition][label]["range"]
 
     def is_equal(self, image):
-        self.show_rectangle(image)
         binary_image = self.binary(image)
+        # print(len(self.range))
         for i in range(len(self.range)):
             clipped_image = self.clip_image(
                 binary_image, self.range[i]["target"][0], self.range[i]["target"][1])
             if not self.check_color(clipped_image, self.range[i]["color"]):
                 # Falseのときに実行するクラス
                 return False
+        self.show_rectangle(image)
         return True
 
     def show_rectangle(self, image):
@@ -38,14 +41,24 @@ class ImageRecognition():
         gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
         _, binary = cv2.threshold(
             gray_image, self.threshold[0], self.threshold[1], cv2.THRESH_BINARY)
+        # cv2.imshow('frame', binary)
+        # if cv2.waitKey(1) == 27:
+        #     return
         return binary
 
     def clip_image(self, binary_image, min, max):
+        # print(min, max)
         clipped_image = binary_image[min[1]:max[1], min[0]:max[0]]
+        # cv2.imshow('frame', clipped_image)
+        # if cv2.waitKey(1) == 27:
+        #     return
         return clipped_image
 
     def check_color(self, clipped_image, color):
         size = self.check_size(color)
+        # print("correct_rate", np.count_nonzero(clipped_image == color),
+        #       "color_size", size, "image_size", clipped_image.shape)
+        # print(clipped_image)
         if np.count_nonzero(clipped_image == color) > self.correct_rate*size:
             return True
 
