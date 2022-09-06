@@ -5,6 +5,6 @@ MODE = "recorded"
 
 IMAGE_DIR = './data/image/a.png'
 
-VIDEO_PATH = './data/video/asari_trim2.mp4'
+VIDEO_PATH = './data/video/enemy_pinch.mp4'
 PORT_NUM = 1
 
