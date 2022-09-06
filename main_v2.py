@@ -16,19 +16,23 @@ if __name__ == "__main__":
 
         # ゲームが進行中じゃなかったら
         if not is_gaming:
+            t = time.time()
             if game_start.is_equal(frame):
                 is_gaming = True
+            print(time.time()-t)
 
         # ゲームが進行中だったら
         else:
-            if not map_is_opened.is_equal(frame):
-                print("ピンチの条件分岐")
-            else:
+            # マップを開いていたら
+            if map_is_opened.is_equal(frame):
                 print("マップ開いてる時の処理")
+            # マップを開いていなかったら
+            else:
+                print("ピンチの条件分岐")
+
             if game_finish.is_equal(frame):
                 is_gaming = False
 
-        # print(is_gaming)
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) == 27:
             break
