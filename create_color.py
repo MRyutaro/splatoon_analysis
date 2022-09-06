@@ -4,6 +4,7 @@ import json
 import numpy as np
 
 
+# この関数があまりよろしくない。関数名だけ見て戻り値が何なのか分からない。
 def read_json(game_transition: str, label: str):
     open_json = open(f"config/json/{game_transition}.json")
     read_json = json.load(open_json)
@@ -14,6 +15,7 @@ def read_json(game_transition: str, label: str):
     return thresholds, recognition_data
 
 
+# これはけちらずにrangeじゃなくてmin, maxと書いた方がいいかも。
 def binary(image, range):
     bgr_frame = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     gray_frame = cv2.cvtColor(bgr_frame, cv2.COLOR_BGR2GRAY)
@@ -35,11 +37,11 @@ def clip_image(image, recognition_range):
         max = recognition_range[i]["target"][1]
         clipped_image = image[min[1]:max[1],
                               min[0]:max[0]]
-        get_color_from(i, clipped_image)
+        get_color_from(clipped_image, i)
         show_rectangle(image, min, max)
 
 
-def get_color_from(i, clipped_image):
+def get_color_from(clipped_image, i):
     # print("色のデータを取得")
     print(f"{i+1}番目の範囲------------------------")
     print("横の長さ", len(clipped_image[0]))
@@ -73,13 +75,35 @@ if __name__ == "__main__":
     # clip_image(image, game_finish[1])
 
     # map
-    image_path = "./data/image/map.png"
-    image = cv2.imread(image_path)
-    image = cv2.resize(image, (768, 432))
-    map = read_json("map", "is opened")
-    image = binary(image, map[0])
-    clip_image(image, map[1])
+    # image_path = "./data/image/map.png"
+    # image = cv2.imread(image_path)
+    # image = cv2.resize(image, (768, 432))
+    # map = read_json("map", "is opened")
+    # image = binary(image, map[0])
+    # clip_image(image, map[1])
 
-    cv2.imshow("image", image)
-    if cv2.waitKey(0) == 27:
-        exit()
+    # friend is in pinch
+    # 画像を大量に
+    # frame_num = 9
+    # for i in range(frame_num):
+    #     image_path = f"./data/image/pinch/friend/{i}.png"
+    #     image = cv2.imread(image_path)
+    #     image = cv2.resize(image, (768, 432))
+    #     friend_is_in_pinch = read_json("in_pinch", "is friend")
+    #     image = binary(image, friend_is_in_pinch[0])
+    #     clip_image(image, friend_is_in_pinch[1])
+
+    # enemy is in pinch
+    # 画像を大量に
+    frame_num = 9
+    for i in range(frame_num):
+        image_path = f"./data/image/pinch/enemy/{i}.png"
+        image = cv2.imread(image_path)
+        image = cv2.resize(image, (768, 432))
+        enemy_is_in_pinch = read_json("in_pinch", "is enemy")
+        image = binary(image, enemy_is_in_pinch[0])
+        clip_image(image, enemy_is_in_pinch[1])
+
+    # cv2.imshow("image", image)
+    # if cv2.waitKey(0) == 27:
+    #     exit()
