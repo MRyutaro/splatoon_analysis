@@ -23,10 +23,9 @@ class ImageRecognition():
         binary_image = self.binary(image)
         # print(len(self.range))
         for i in range(len(self.range)):
-            clipped_image = self.clip_image(
+            clipped_binary_image = self.clip_image(
                 binary_image, self.range[i]["target"][0], self.range[i]["target"][1])
-            if not self.check_color(clipped_image, self.range[i]["color"]):
-                # Falseのときに実行するクラス
+            if not self.image_is_equal(clipped_binary_image, self.range[i]["color"]):
                 return False
         self.show_rectangle(image)
         return True
@@ -42,28 +41,29 @@ class ImageRecognition():
         _, binary = cv2.threshold(
             gray_image, self.threshold[0], self.threshold[1], cv2.THRESH_BINARY)
         # cv2.imshow('frame', binary)
-        # if cv2.waitKey(1) == 27:
+        # if cv2.waitKey(0) == 27:
         #     return
         return binary
 
     def clip_image(self, binary_image, min, max):
         # print(min, max)
-        clipped_image = binary_image[min[1]:max[1], min[0]:max[0]]
-        # cv2.imshow('frame', clipped_image)
+        clipped_binary_image = binary_image[min[1]:max[1], min[0]:max[0]]
+        # cv2.imshow('frame', clipped_binary_image)
         # if cv2.waitKey(1) == 27:
         #     return
-        return clipped_image
+        return clipped_binary_image
 
-    def check_color(self, clipped_image, color):
-        size = self.check_size(color)
-        # print("correct_rate", np.count_nonzero(clipped_image == color),
-        #       "color_size", size, "image_size", clipped_image.shape)
-        # print(clipped_image)
-        if np.count_nonzero(clipped_image == color) > self.correct_rate*size:
+    def image_is_equal(self, clipped_binary_image, prepared_binary_image):
+        size = self.check_size(prepared_binary_image)
+        # print("correct-rate", end=" ")
+        # print(np.count_nonzero(clipped_binary_image == prepared_binary_image)/self.check_size(clipped_binary_image))
+        # print("pre-image: ", np.array(prepared_binary_image).shape, "now-image-size: ", clipped_binary_image.shape)
+        # print(clipped_binary_image)
+        if np.count_nonzero(clipped_binary_image == prepared_binary_image) > self.correct_rate*size:
             return True
 
-    def check_size(self, color):
-        size = len(color[0])*len(color)
+    def check_size(self, image):
+        size = len(image[0])*len(image)
         return size
 
 
