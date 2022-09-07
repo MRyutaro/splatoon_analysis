@@ -5,14 +5,14 @@ import json
 
 
 class ImageRecognition():
-    def __init__(self, game_transition: str, label: str, correct_rate: float):
+    def __init__(self, game_transition: str, label: str, correct_rate: float = 0.8):
         self.game_transition = game_transition
         self.label = label
-        self.threshold, self.range = self.read_json(
+        self.threshold, self.range = self.__read_json(
             game_transition, label)
         self.correct_rate = correct_rate
 
-    def read_json(self, game_transition: str, label: str):
+    def __read_json(self, game_transition: str, label: str):
         open_json = open(f"config/json/{game_transition}.json")
         read_json = json.load(open_json)
         # print(read_json[game_transition][label]["threshold"])
@@ -20,22 +20,22 @@ class ImageRecognition():
         return read_json[game_transition][label]["threshold"], read_json[game_transition][label]["range"]
 
     def is_equal(self, image):
-        binary_image = self.binary(image)
+        binary_image = self._binary(image)
         # print(len(self.range))
         for i in range(len(self.range)):
-            clipped_binary_image = self.clip_image(
+            clipped_binary_image = self._clip_image(
                 binary_image, self.range[i]["target"][0], self.range[i]["target"][1])
-            if not self.image_is_equal(clipped_binary_image, self.range[i]["color"]):
+            if not self._image_is_equal(clipped_binary_image, self.range[i]["color"]):
                 return False
-        self.show_rectangle(image)
+        self._draw_rectangle(image)
         return True
 
-    def show_rectangle(self, image):
+    def _draw_rectangle(self, image):
         for i in range(len(self.range)):
             cv2.rectangle(image, (self.range[i]["target"][0]),
                           (self.range[i]["target"][1]), (255, 0, 0), 1)
 
-    def binary(self, image):
+    def _binary(self, image):
         bgr_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
         _, binary = cv2.threshold(
@@ -45,7 +45,7 @@ class ImageRecognition():
         #     return
         return binary
 
-    def clip_image(self, binary_image, min, max):
+    def _clip_image(self, binary_image, min, max):
         # print(min, max)
         clipped_binary_image = binary_image[min[1]:max[1], min[0]:max[0]]
         # cv2.imshow('frame', clipped_binary_image)
@@ -53,16 +53,16 @@ class ImageRecognition():
         #     return
         return clipped_binary_image
 
-    def image_is_equal(self, clipped_binary_image, prepared_binary_image):
-        size = self.check_size(prepared_binary_image)
+    def _image_is_equal(self, clipped_binary_image, prepared_binary_image):
+        size = self.__check_size(prepared_binary_image)
         # print("correct-rate", end=" ")
-        # print(np.count_nonzero(clipped_binary_image == prepared_binary_image)/self.check_size(clipped_binary_image))
+        # print(np.count_nonzero(clipped_binary_image == prepared_binary_image)/self.__check_size(clipped_binary_image))
         # print("pre-image: ", np.array(prepared_binary_image).shape, "now-image-size: ", clipped_binary_image.shape)
         # print(clipped_binary_image)
         if np.count_nonzero(clipped_binary_image == prepared_binary_image) > self.correct_rate*size:
             return True
 
-    def check_size(self, image):
+    def __check_size(self, image):
         size = len(image[0])*len(image)
         return size
 
