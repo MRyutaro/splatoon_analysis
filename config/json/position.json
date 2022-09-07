@@ -4,8 +4,8 @@
     "height": 432
   },
   "icons": {
-    "default": {
-      "friend": {
+    "friend_icons_range": {
+      "default": {
         "min": {
           "x": 221,
           "y": 18
@@ -15,19 +15,7 @@
           "y": 52
         }
       },
-      "enemy": {
-        "min": {
-          "x": 416,
-          "y": 18
-        },
-        "max": {
-          "x": 545,
-          "y": 52
-        }
-      }
-    },
-    "friend_pinch": {
-      "friend": {
+      "frind_is_in_pinch": {
         "min": {
           "x": 235,
           "y": 20
@@ -37,19 +25,7 @@
           "y": 50
         }
       },
-      "enemy": {
-        "min": {
-          "x": 414,
-          "y": 17
-        },
-        "max": {
-          "x": 560,
-          "y": 53
-        }
-      }
-    },
-    "enemy_pinch": {
-      "friend": {
+      "enemy_is_in_pinch": {
         "min": {
           "x": 207,
           "y": 17
@@ -58,8 +34,30 @@
           "x": 350,
           "y": 53
         }
+      }
+    },
+    "enemy_icons_range": {
+      "default": {
+        "min": {
+          "x": 416,
+          "y": 18
+        },
+        "max": {
+          "x": 545,
+          "y": 52
+        }
       },
-      "enemy": {
+      "frind_is_in_pinch": {
+        "min": {
+          "x": 414,
+          "y": 17
+        },
+        "max": {
+          "x": 560,
+          "y": 53
+        }
+      },
+      "enemy_is_in_pinch": {
         "min": {
           "x": 418,
           "y": 21
