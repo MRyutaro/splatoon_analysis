@@ -10,10 +10,6 @@ class CheckPinch(ImageRecognition):
         binary_image = self.binary(image)
         clipped_binary_image = self.clip_image(
             binary_image, self.range[0]["target"][0], self.range[0]["target"][1])
-        # for i in range(len(self.range[0]["color"])):
-        #     if self.image_is_equal(clipped_binary_image, self.range[0]["color"][i]):
-        #         self.show_rectangle(image)
-        #         return True
         if self.image_is_equal(clipped_binary_image, self.range[0]["color"][0]):
             self.show_rectangle(image)
             return True
