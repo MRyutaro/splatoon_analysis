@@ -15,7 +15,7 @@
           "y": 52
         }
       },
-      "frind_is_in_pinch": {
+      "friend_is_in_pinch": {
         "min": {
           "x": 235,
           "y": 20
@@ -47,7 +47,7 @@
           "y": 52
         }
       },
-      "frind_is_in_pinch": {
+      "friend_is_in_pinch": {
         "min": {
           "x": 414,
           "y": 17
