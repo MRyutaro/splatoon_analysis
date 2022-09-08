@@ -1,6 +1,5 @@
 import cv2
 import json
-import numpy as np
 import statistics
 import time
 from check_pinch import CheckPinch
