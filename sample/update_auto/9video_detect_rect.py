@@ -50,18 +50,18 @@ def main():
 
         # 短径フィッティング
         # for i, cnt in enumerate(contours):
-            # if len(cnt) > 5:
-            #     center, (width, height), angle = cv2.fitEllipse(cnt)
-            #     cv2.putText(binary_image, str(i), (int(center[0]), int(center[1])), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 1, cv2.LINE_AA)
-            #     cv2.ellipse(binary_image, ((center[0], center[1]), (width, height), angle), (255, 0, 0))  # type: ignore
-            # x, y, width, height = cv2.boundingRect(cnt)
-            # area = width*height
-            # if icon_area_lower < area < icon_area_upper:
-            #     # if 1-squareness_valid_range < height/width < 1+squareness_valid_range:
-            #     cv2.rectangle(
-            #         frame, (x, y), (x + width, y + height), (255, 0, 0), 1)
-            #     cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_PLAIN,
-            #                 1, (0, 255, 0), 1, cv2.LINE_AA)
+        # if len(cnt) > 5:
+        #     center, (width, height), angle = cv2.fitEllipse(cnt)
+        #     cv2.putText(binary_image, str(i), (int(center[0]), int(center[1])), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 1, cv2.LINE_AA)
+        #     cv2.ellipse(binary_image, ((center[0], center[1]), (width, height), angle), (255, 0, 0))  # type: ignore
+        # x, y, width, height = cv2.boundingRect(cnt)
+        # area = width*height
+        # if icon_area_lower < area < icon_area_upper:
+        #     # if 1-squareness_valid_range < height/width < 1+squareness_valid_range:
+        #     cv2.rectangle(
+        #         frame, (x, y), (x + width, y + height), (255, 0, 0), 1)
+        #     cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_PLAIN,
+        #                 1, (0, 255, 0), 1, cv2.LINE_AA)
 
         cv2.drawContours(frame, contours, -1,
                          (0, 0, 255), -1, cv2.LINE_AA)
