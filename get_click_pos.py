@@ -8,9 +8,9 @@ def onMouse(event, x, y, flags, params):
 
 if __name__ == "__main__":
     # ピンチの判定
-    image_path = "./data/image/default.png"
-    # image_path = "./data/image/friend_pinch.png"
-    # image_path = "./data/image/enemy_pinch.png"
+    # image_path = "./data/image/default.png"
+    image_path = "./data/image/pinch/friend/0.png"
+    image_path = "./data/image/pinch/enemy/0.png"
     # ゲーム開始
     # image_path = "./data/image/start.png"
     # ゲーム終了

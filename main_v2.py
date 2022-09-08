@@ -1,3 +1,4 @@
+from tkinter import Frame
 import cv2
 import time
 from image_recognition_v1 import ImageRecognition
@@ -6,19 +7,17 @@ from check_conditions import CheckConditions
 
 
 if __name__ == "__main__":
-    # settings
     # movie = cv2.VideoCapture(1)
     movie = cv2.VideoCapture('./data/video/area_trim1.mp4')
     game_start = ImageRecognition("game", "starts")
     game_finish = ImageRecognition("game", "finishes")
     map_is_opened = ImageRecognition("map", "is opened", 0.9)
-    friend_check_conditions = CheckConditions("friend")
-    enemy_check_conditions = CheckConditions("enemy")
 
     friend_is_in_pinch = CheckPinch("is friend")
     enemy_is_in_pinch = CheckPinch("is enemy")
-    friends_conditions = []
-    enemies_conditions = []
+
+    check_friend_conditions = CheckConditions("friend")
+    check_enemy_conditions = CheckConditions("enemy")
 
     is_gaming = False
     while movie.isOpened:
@@ -27,32 +26,26 @@ if __name__ == "__main__":
 
         # ゲームが進行中じゃなかったら
         if not is_gaming:
-            print("ゲーム停止中", end=" | ")
-            # t = time.time()
+            print("ゲーム停止中")
             if game_start.is_equal(frame):
                 is_gaming = True
-            # print(time.time()-t)
 
         # ゲームが進行中だったら
         else:
-            print("ゲーム進行中", end=" | ")
-            # マップを開いていたら
-            if map_is_opened.is_equal(frame):
-                print("マップ開いている", end=" | ")
-            # マップを開いていなかったら
-            else:
-                print("マップ開いてない", end=" | ")
+            if not map_is_opened.is_equal(frame):
                 if friend_is_in_pinch.is_equal(frame):
-                    print("味方がピンチ！！", end="")
+                    friend_conditions = check_friend_conditions.check_conditions(frame, "friend")
+                    enemy_conditions = check_enemy_conditions.check_conditions(frame, "friend")
                 elif enemy_is_in_pinch.is_equal(frame):
-                    print("敵がピンチ！！！", end="")
+                    friend_conditions = check_friend_conditions.check_conditions(frame, "enemy")
+                    enemy_conditions = check_enemy_conditions.check_conditions(frame, "enemy")
                 else:
-                    print("デフォルト", end="")
-
+                    friend_conditions = check_friend_conditions.check_conditions(frame)
+                    enemy_conditions = check_enemy_conditions.check_conditions(frame)
+                print(friend_conditions, enemy_conditions)
             if game_finish.is_equal(frame):
                 is_gaming = False
 
-        print("\n")
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) == 27:
             break

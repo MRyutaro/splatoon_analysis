@@ -17,9 +17,9 @@ import cv2
 
 if __name__ == "__main__":
     # ピンチの判定
-    image_path = "./data/image/default.png"
-    # image_path = "./data/image/friend_pinch.png"
-    # image_path = "./data/image/enemy_pinch.png"
+    # image_path = "./data/image/default.png"
+    # image_path = "./data/image/pinch/friend/0.png"
+    image_path = "./data/image/pinch/enemy/0.png"
     # ゲーム開始
     # image_path = "./data/image/start.png"
     # ゲーム終了
@@ -31,20 +31,20 @@ if __name__ == "__main__":
 
     # ピンチの判定--------------------------------------------------------
     # 味方のピンチの範囲
-    cv2.rectangle(image, (184, 16), (214, 33), (255, 0, 0), 1)
+    cv2.rectangle(image, (184, 20), (214, 29), (255, 0, 0), 1)
     # 敵のピンチの範囲
-    cv2.rectangle(image, (554, 16), (589, 33), (255, 0, 0), 1)
+    cv2.rectangle(image, (554, 20), (584, 29), (255, 0, 0), 1)
 
     # イカメーター in デフォルト
-    # cv2.rectangle(image, (213, 11), (351, 43), (255, 0, 0), 1)
+    cv2.rectangle(image, (213, 11), (351, 43), (255, 0, 0), 1)
     # cv2.rectangle(image, (417, 11), (555, 43), (255, 0, 0), 1)
 
     # # イカメーター in 味方がピンチ
-    # cv2.rectangle(image, (227, 13), (348, 42), (255, 0, 0), 1)
+    cv2.rectangle(image, (227, 13), (348, 42), (255, 0, 0), 1)
     # cv2.rectangle(image, (414, 10), (569, 45), (255, 0, 0), 1)
 
     # # イカメーター in 敵がピンチ
-    # cv2.rectangle(image, (197, 10), (352, 45), (255, 0, 0), 1)
+    cv2.rectangle(image, (197, 10), (352, 45), (255, 0, 0), 1)
     # cv2.rectangle(image, (418, 13), (539, 42), (255, 0, 0), 1)
 
     # ゲームの開始の判定--------------------------------------------------

@@ -143,7 +143,7 @@ def check_finish_game(frame):
                     ["upper_right", [549, 28], [581, 41], 255],
                     ["botton_left", [29, 282], [154, 298], 255],
                     ["bottom_right", [508, 364], [610, 383], 255]]
-    binary = change_color2white(frame, 140, 30)
+    binary = change_hcolor2white(frame, 140, 30)
     for i in range(len(finish_range)):
         if check_whether_one_color(
                 binary, finish_range[i][1], finish_range[i][2], finish_range[i][3]) is False:
