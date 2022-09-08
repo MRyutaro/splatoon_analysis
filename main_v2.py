@@ -1,4 +1,3 @@
-from tkinter import Frame
 import cv2
 import time
 from image_recognition_v1 import ImageRecognition
