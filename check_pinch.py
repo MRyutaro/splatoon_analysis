@@ -4,6 +4,9 @@ from image_recognition_v1 import ImageRecognition
 
 
 class CheckPinch(ImageRecognition):
+    def __init__(self, team: str):
+        super().__init__("in_pinch", team)
+
     def is_equal(self, image):
         # print("True or False")
         # print(len(self.range)) -> 1
@@ -20,8 +23,8 @@ class CheckPinch(ImageRecognition):
 if __name__ == "__main__":
     # movie = cv2.VideoCapture(1)
     movie = cv2.VideoCapture('./data/video/area_trim1.mp4')
-    friend_is_in_pinch = CheckPinch("in_pinch", "is friend")
-    enemy_is_in_pinch = CheckPinch("in_pinch", "is enemy")
+    friend_is_in_pinch = CheckPinch("is friend")
+    enemy_is_in_pinch = CheckPinch("is enemy")
 
     while movie.isOpened:
         ret, frame = movie.read()
