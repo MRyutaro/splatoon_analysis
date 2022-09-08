@@ -1,4 +1,3 @@
-from tkinter import Frame
 import cv2
 import time
 from image_recognition_v1 import ImageRecognition
@@ -34,14 +33,20 @@ if __name__ == "__main__":
         else:
             if not map_is_opened.is_equal(frame):
                 if friend_is_in_pinch.is_equal(frame):
-                    friend_conditions = check_friend_conditions.check_conditions(frame, "friend")
-                    enemy_conditions = check_enemy_conditions.check_conditions(frame, "friend")
+                    friend_conditions = check_friend_conditions.check_conditions(
+                        frame, "friend")
+                    enemy_conditions = check_enemy_conditions.check_conditions(
+                        frame, "friend")
                 elif enemy_is_in_pinch.is_equal(frame):
-                    friend_conditions = check_friend_conditions.check_conditions(frame, "enemy")
-                    enemy_conditions = check_enemy_conditions.check_conditions(frame, "enemy")
+                    friend_conditions = check_friend_conditions.check_conditions(
+                        frame, "enemy")
+                    enemy_conditions = check_enemy_conditions.check_conditions(
+                        frame, "enemy")
                 else:
-                    friend_conditions = check_friend_conditions.check_conditions(frame)
-                    enemy_conditions = check_enemy_conditions.check_conditions(frame)
+                    friend_conditions = check_friend_conditions.check_conditions(
+                        frame)
+                    enemy_conditions = check_enemy_conditions.check_conditions(
+                        frame)
                 print(friend_conditions, enemy_conditions)
             if game_finish.is_equal(frame):
                 is_gaming = False

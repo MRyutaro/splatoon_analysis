@@ -3,25 +3,69 @@
     "width": 768,
     "height": 432
   },
-  "icon": {
-    "my": {
-      "min": {
-        "x": 221,
-        "y": 18
+  "icons": {
+    "friend_icons_range": {
+      "default": {
+        "min": {
+          "x": 213,
+          "y": 11
+        },
+        "max": {
+          "x": 351,
+          "y": 43
+        }
       },
-      "max": {
-        "x": 350,
-        "y": 52
+      "friend_is_in_pinch": {
+        "min": {
+          "x": 227,
+          "y": 13
+        },
+        "max": {
+          "x": 348,
+          "y": 42
+        }
+      },
+      "enemy_is_in_pinch": {
+        "min": {
+          "x": 197,
+          "y": 10
+        },
+        "max": {
+          "x": 352,
+          "y": 45
+        }
       }
     },
-    "your": {
-      "min": {
-        "x": 418,
-        "y": 18
+    "enemy_icons_range": {
+      "default": {
+        "min": {
+          "x": 417,
+          "y": 11
+        },
+        "max": {
+          "x": 555,
+          "y": 43
+        }
       },
-      "max": {
-        "x": 547,
-        "y": 52
+      "friend_is_in_pinch": {
+        "min": {
+          "x": 414,
+          "y": 10
+        },
+        "max": {
+          "x": 569,
+          "y": 45
+        }
+      },
+      "enemy_is_in_pinch": {
+        "min": {
+          "x": 418,
+          "y": 13
+        },
+        "max": {
+          "x": 539,
+          "y": 42
+        }
       }
     }
   }
