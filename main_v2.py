@@ -8,6 +8,7 @@ from check_conditions import CheckConditions
 if __name__ == "__main__":
     # movie = cv2.VideoCapture(1)
     movie = cv2.VideoCapture('./data/video/area_trim1.mp4')
+    fps = movie.get(cv2.CAP_PROP_FPS)
     game_start = ImageRecognition("game", "starts")
     game_finish = ImageRecognition("game", "finishes")
     map_is_opened = ImageRecognition("map", "is opened", 0.9)
@@ -22,6 +23,7 @@ if __name__ == "__main__":
     while movie.isOpened:
         ret, frame = movie.read()
         frame = cv2.resize(frame, (768, 432))
+        decision_start_time = time.time()
 
         # ゲームが進行中じゃなかったら
         if not is_gaming:
@@ -54,6 +56,9 @@ if __name__ == "__main__":
         cv2.imshow('frame', frame)
         if cv2.waitKey(1) == 27:
             break
-        time.sleep(0.02)
+        decision_execution_time = time.time() - decision_start_time
+        print(decision_execution_time)
+        if 1/fps - decision_execution_time > 0:
+            time.sleep(1/fps - decision_execution_time)
 
     movie.release()
